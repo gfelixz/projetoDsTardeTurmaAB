@@ -32,9 +32,13 @@ const Cadastro = () => {
 
   return (
     <LinearGradient
+<<<<<<< Updated upstream
       colors={['#fedea6','#fc7ea7', '#7466e6']}
       start={{ x: 0, y: 0 }} 
       end={{ x: 1, y: 1 }} 
+=======
+      colors={['#8000d5','#f910a3', '#fddf00']}
+>>>>>>> Stashed changes
       style={styles.container}
     >
     <SafeAreaView style={styles.container}>
@@ -42,52 +46,42 @@ const Cadastro = () => {
       <View style={styles.formContainer}>
         <Text style={styles.titulo}>Cadastro</Text>
 
-        <Text style={styles.label}>Nome</Text>
+        
         <TextInput
           style={styles.input}
-          placeholder="Digite seu nome"
+          placeholder="Nome de usuário"
           placeholderTextColor="#aaa"
           value={nome}
           onChangeText={setNome}
         />
 
-        <Text style={styles.label}>Email</Text>
+     
         <TextInput
           style={styles.input}
-          placeholder="Digite seu email"
+          placeholder="Email"
           placeholderTextColor="#aaa"
           value={email}
           onChangeText={setEmail}
           keyboardType="email-address"
         />
 
-        <Text style={styles.label}>Senha</Text>
         <TextInput
           style={styles.input}
-          placeholder="Digite sua senha"
+          placeholder="Senha"
           placeholderTextColor="#aaa"
           value={senha}
           onChangeText={setSenha}
           secureTextEntry
         />
 
-        <Text style={styles.label}>WhatsApp</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Digite seu número"
-          placeholderTextColor="#aaa"
-          value={whatsapp}
-          onChangeText={setWhatsapp}
-          keyboardType="phone-pad"
-        />
+       
+     
 
         <TouchableOpacity style={styles.botao} onPress={handleCadastro}>
-          <Text style={styles.textoBotao}>Cadastrar</Text>
+          <Text style={styles.textoBotao}>Login</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.botao} onPress={Inicio}>
-          <Text style={styles.textoBotao}>Voltar</Text>
-        </TouchableOpacity>
+       
 
       </View>
     </SafeAreaView>
@@ -109,25 +103,19 @@ const styles = StyleSheet.create({
   titulo: {
     fontSize: 26,
     fontFamily: 'negrito',
-    color: '#000',
+    color: '#FFF',
     textAlign: 'center',
   },
-  label: {
-    fontSize: 14,
-    fontFamily: 'normal',
-    color: '#333',
-    marginBottom: 6,
-  },
+
   input: {
     height: 50,
-    backgroundColor: '#fff',
     borderRadius: 20,
     borderWidth: 2,
     paddingHorizontal: 14,
     fontSize: 16,
     fontFamily: 'normal',
     borderWidth: 1,
-    borderColor: '#000',
+    borderColor: '#FFF',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
@@ -138,17 +126,19 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   botao: {
-    backgroundColor: '#000',
+    backgroundColor: '#1d1436',
     paddingVertical: 14,
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 20,
+    borderRadius: 20,
   },
   textoBotao: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 25,
     fontFamily: 'negrito',
+    
   },
 });
 
