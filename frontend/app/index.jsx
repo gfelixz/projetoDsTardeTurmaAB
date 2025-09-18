@@ -12,36 +12,33 @@ export default function Index() {
 
   return (
     <LinearGradient
-          colors={['#fedea6','#fc7ea7', '#7466e6']}
-          start={{ x: 0, y: 0 }} 
-          end={{ x: 1, y: 1 }} 
+    colors={['#8000d5','#f910a3', '#fddf00']}
+  
           style={styles.container}
         >
     <View style={styles.container}>
 
 
-      <Text style={styles.title}>Descubra Musica Local</Text>
-      <Text style={styles.subtitle}>Conecte-se com artistas sa sua região</Text>
+      <Text style={styles.title}>Login</Text>
+      
 
 
       <View style={styles.form}>
-
+      <View style={styles.formContainer}>
         <View style={styles.inputBlock}>
-          <Text style={styles.label}>E-mail</Text>
+         
           <TextInput
             style={styles.input}
-            placeholder="email@exemplo.com"
+            placeholder="Email"
             placeholderTextColor="#aaa"
             keyboardType="email-address"
           />
         </View>
-
-
         <View style={styles.inputBlock}>
-          <Text style={styles.label}>Senha</Text>
+        
           <TextInput
             style={styles.input}
-            placeholder="••••••••"
+            placeholder="Senha"
             secureTextEntry={true}
             placeholderTextColor="#aaa"
           />
@@ -49,7 +46,7 @@ export default function Index() {
       </View>
 
       <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Entrar</Text>
+        <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={cadastro}>
@@ -58,6 +55,7 @@ export default function Index() {
           <Text style={styles.footerLink}>Cadastre-se</Text>
         </Text>
       </TouchableOpacity>
+    </View>
     </View>
     </LinearGradient>
   );
@@ -73,12 +71,7 @@ const styles = StyleSheet.create({
   inputBlock: {
     marginBottom: 20,
   },
-  label: {
-    fontSize: 14,
-    fontFamily: 'normal',
-    color: '#333',
-    marginBottom: 6,
-  },
+ 
   form: {
     marginTop: 150,
   },
@@ -86,7 +79,6 @@ const styles = StyleSheet.create({
     height: 50,
     backgroundColor: '#fff',
     borderRadius: 20,
-    borderWidth: 2,
     paddingHorizontal: 14,
     fontSize: 16,
     fontFamily: 'normal',
@@ -102,7 +94,7 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   button: {
-    backgroundColor: '#000',
+    backgroundColor: '#1d1436',
     paddingVertical: 14,
     borderRadius: 8,
     alignItems: 'center',
