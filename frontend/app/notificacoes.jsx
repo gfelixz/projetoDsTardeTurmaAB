@@ -1,35 +1,21 @@
-import { AntDesign } from "@expo/vector-icons";
-import { LinearGradient } from "expo-linear-gradient";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback } from "react";
 import {
-  Animated,
+  View,
+  Text,
   Image,
+  StyleSheet,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
-  Text,
   TouchableOpacity,
-  View,
-  useWindowDimensions,
+  useWindowDimensions
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
+import { AntDesign } from "@expo/vector-icons";
 
-const Notificacoes = () => {
-  const navigation = useNavigation();
+export default function Notificacoes({ navigation }) {
   const { width } = useWindowDimensions();
-
   const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
-  const rf = (size) => Math.round(clamp(size * (width / 390), 12, 30));
-
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 600,
-      useNativeDriver: true,
-    }).start();
-  }, []);
+  const rf = useCallback(size => Math.round(clamp(size * (width / 390), 12, 32)), [width]);
 
   const notificacoes = [
     {
@@ -51,83 +37,92 @@ const Notificacoes = () => {
 
   return (
     <LinearGradient colors={["#8000d5", "#f910a3", "#fddf00"]} style={styles.gradient}>
-      <SafeAreaView style={styles.safe}>
-        <ScrollView contentContainerStyle={styles.scroll}>
-          <TouchableOpacity style={styles.backCircle} onPress={() => navigation.goBack()}>
-            <AntDesign name="arrowleft" size={22} color="#fff" />
-          </TouchableOpacity>
+      <SafeAreaView style={{ flex: 1 }}>
 
-          <Animated.View style={{ opacity: fadeAnim, width: "100%", alignItems: "center" }}>
-            <Text style={[styles.titulo, { fontSize: rf(26) }]}>Notificações</Text>
+        {/* Botão de voltar */}
+        <TouchableOpacity style={styles.backCircle} onPress={() => navigation.goBack()}>
+          <AntDesign name="arrowleft" size={22} color="#fff" />
+        </TouchableOpacity>
 
-            {notificacoes.map((item, i) => (
-              <View key={i} style={[styles.card, { padding: rf(16), borderRadius: rf(25) }]}>
-                <View style={styles.row}>
-                  <Image source={{ uri: item.img }} style={[styles.avatar, { width: rf(60), height: rf(60) }]} />
-                  <View>
-                    <Text style={[styles.nome, { fontSize: rf(18) }]}>{item.nome}</Text>
-                    <Text style={[styles.desc, { fontSize: rf(15) }]}>{item.texto}</Text>
-                  </View>
-                </View>
+        <ScrollView contentContainerStyle={styles.container}>
+
+          {/* LOGO */}
+          <Image
+            source={require("../assets/images/Logofundo.png")}
+            style={[styles.logo, { width: rf(180), height: rf(100) }]}
+          />
+
+          {/* TÍTULO */}
+          <Text style={[styles.title, { fontSize: rf(31) }]}>
+            Notificações
+          </Text>
+
+          {/* CAIXA DE NOTIFICAÇÕES */}
+          <View style={[styles.box, { padding: rf(18), borderRadius: rf(22) }]}>
+
+            {notificacoes.map((item) => (
+              <View key={item.id} style={styles.notifItem}>
+                <Text style={[styles.notifText, { fontSize: rf(16) }]}>
+                  • {item.texto}
+                </Text>
               </View>
             ))}
-          </Animated.View>
+
+          </View>
+
         </ScrollView>
       </SafeAreaView>
     </LinearGradient>
   );
-};
+}
 
 const styles = StyleSheet.create({
   gradient: { flex: 1 },
-  safe: { flex: 1 },
-  scroll: { flexGrow: 1, paddingTop: 20, alignItems: "center" },
 
   backCircle: {
-    backgroundColor: "#1D143642",
-    padding: 10,
-    borderRadius: 30,
-    position: "absolute",
-    top: 10,
-    left: 12,
-    zIndex: 10,
+    width: 40,
+    height: 40,
+    borderRadius: 40,
+    backgroundColor: "#ffffff30",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: 20,
+    marginTop: 8,
   },
 
-  titulo: {
-    color: "#FFF",
+  container: {
+    alignItems: "center",
+    paddingTop: 20,
+    paddingBottom: 50,
+  },
+
+  logo: {
+    resizeMode: "contain",
+    marginBottom: 12,
+	height: 40,
+  },
+
+  title: {
+    color: "#fff",
     fontFamily: "negrito",
-    marginBottom: 20,
+    marginBottom: 18,
   },
 
-  card: {
+  box: {
     width: "90%",
     backgroundColor: "#1D143642",
-    marginBottom: 12,
     borderWidth: 2,
-    borderColor: "#FFF3",
+    borderColor: "#FFF",
   },
 
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
+  notifItem: {
+    paddingVertical: 10,
+    borderBottomColor: "#ffffff30",
+    borderBottomWidth: 1,
   },
 
-  avatar: {
-    borderRadius: 100,
-    marginRight: 14,
-    backgroundColor: "#ffffff33",
-  },
-
-  nome: {
-    color: "#FFF",
-    fontFamily: "negrito",
-  },
-
-  desc: {
-    color: "#FFF",
-    opacity: 0.8,
+  notifText: {
+    color: "#fff",
     fontFamily: "normal",
   },
 });
-
-export default Notificacoes;
