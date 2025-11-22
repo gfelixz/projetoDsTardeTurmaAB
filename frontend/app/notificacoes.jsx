@@ -61,16 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  /* 🔵 BARRA ROXA DO FIGMA */
-  topBar: {
-    width: "100%",
-    height: 75,
-    backgroundColor: "#6A00B8",
-    justifyContent: "center",
-    paddingHorizontal: 20,
-    paddingTop: 5,
-    marginBottom: 20,
-  },
+
   backButton: {
     width: 42,
     height: 42,
@@ -99,8 +90,9 @@ const styles = StyleSheet.create({
 
   /* 🔔 BOX DE NOTIFICAÇÕES */
   box: {
-    width: "88%",
-    backgroundColor: "rgba(255,255,255,0.15)",
+    width: "58%",
+	height: "100%",
+   backgroundColor: "#1D143642",
     borderRadius: 20,
     paddingVertical: 10,
     paddingHorizontal: 15,
