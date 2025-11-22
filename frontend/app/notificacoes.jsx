@@ -1,128 +1,135 @@
-import React, { useCallback } from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  SafeAreaView,
-  ScrollView,
-  TouchableOpacity,
-  useWindowDimensions
-} from "react-native";
+import React from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AntDesign } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Notificacoes({ navigation }) {
-  const { width } = useWindowDimensions();
-  const clamp = (val, min, max) => Math.max(min, Math.min(max, val));
-  const rf = useCallback(size => Math.round(clamp(size * (width / 390), 12, 32)), [width]);
-
-  const notificacoes = [
-    {
-      nome: "Fulano",
-      texto: "Seguiu você",
-      img: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-    },
-    {
-      nome: "Nirvana",
-      texto: "Lançou uma música",
-      img: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-    },
-    {
-      nome: "Soundgarden da Silva",
-      texto: "Mandou uma mensagem",
-      img: "https://cdn-icons-png.flaticon.com/512/149/149071.png",
-    },
-  ];
+const Notificacoes = () => {
+  const navigation = useNavigation();
 
   return (
     <LinearGradient colors={["#8000d5", "#f910a3", "#fddf00"]} style={styles.gradient}>
-      <SafeAreaView style={{ flex: 1 }}>
+      
 
-        {/* Botão de voltar */}
-        <TouchableOpacity style={styles.backCircle} onPress={() => navigation.goBack()}>
-          <AntDesign name="arrowleft" size={22} color="#fff" />
-        </TouchableOpacity>
-
-        <ScrollView contentContainerStyle={styles.container}>
-
-          {/* LOGO */}
+      <ScrollView contentContainerStyle={{ alignItems: "center", paddingBottom: 40 }}>
+        
+        {/* 💛 LOGO GRANDE + TÍTULO */}
+        <View style={styles.headerContainer}>
           <Image
             source={require("../assets/images/Logofundo.png")}
-            style={[styles.logo, { width: rf(180), height: rf(100) }]}
+            style={styles.headerLogo}
           />
+          <Text style={styles.title}>Notificações</Text>
+        </View>
 
-          {/* TÍTULO */}
-          <Text style={[styles.title, { fontSize: rf(31) }]}>
-            Notificações
-          </Text>
-
-          {/* CAIXA DE NOTIFICAÇÕES */}
-          <View style={[styles.box, { padding: rf(18), borderRadius: rf(22) }]}>
-
-            {notificacoes.map((item) => (
-              <View key={item.id} style={styles.notifItem}>
-                <Text style={[styles.notifText, { fontSize: rf(16) }]}>
-                  • {item.texto}
-                </Text>
-              </View>
-            ))}
-
+        {/* 🔔 LISTA DE NOTIFICAÇÕES */}
+        <View style={styles.box}>
+          {/* Notificação 1 */}
+          <View style={styles.notifItem}>
+            <Image
+              source={{ uri: "" }}
+              style={styles.avatar}
+            />
+            <Text style={styles.notifText}><Text style={styles.nome}>Fulano</Text> Seguiu você</Text>
           </View>
 
-        </ScrollView>
-      </SafeAreaView>
+          {/* Notificação 2 */}
+          <View style={styles.notifItem}>
+            <Image
+              source={{ uri: "" }}
+              style={styles.avatar}
+            />
+            <Text style={styles.notifText}><Text style={styles.nome}>Nirvana</Text> Lançou uma música</Text>
+          </View>
+
+          {/* Notificação 3 */}
+          <View style={styles.notifItem}>
+            <Image
+              source={{ uri: "" }}
+              style={styles.avatar}
+            />
+            <Text style={styles.notifText}><Text style={styles.nome}>Soundgarden da Silva</Text> Mandou uma mensagem</Text>
+          </View>
+        </View>
+      </ScrollView>
     </LinearGradient>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  gradient: { flex: 1 },
+  gradient: {
+    flex: 1,
+  },
 
-  backCircle: {
-    width: 40,
-    height: 40,
-    borderRadius: 40,
-    backgroundColor: "#ffffff30",
+  /* 🔵 BARRA ROXA DO FIGMA */
+  topBar: {
+    width: "100%",
+    height: 75,
+    backgroundColor: "#6A00B8",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+    paddingTop: 5,
+    marginBottom: 20,
+  },
+  backButton: {
+    width: 42,
+    height: 42,
+    backgroundColor: "#D05CFF",
+    borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: 20,
-    marginTop: 8,
   },
 
-  container: {
+  /* 💛 HEADER */
+  headerContainer: {
     alignItems: "center",
-    paddingTop: 20,
-    paddingBottom: 50,
+    marginBottom: 20,
   },
-
-  logo: {
+  headerLogo: {
+    width: 150,
+    height: 150,
     resizeMode: "contain",
-    marginBottom: 12,
-	height: 40,
   },
-
   title: {
+    fontSize: 26,
+    fontWeight: "bold",
     color: "#fff",
-    fontFamily: "negrito",
-    marginBottom: 18,
+    marginTop: 10,
   },
 
+  /* 🔔 BOX DE NOTIFICAÇÕES */
   box: {
-    width: "90%",
-    backgroundColor: "#1D143642",
-    borderWidth: 2,
-    borderColor: "#FFF",
+    width: "88%",
+    backgroundColor: "rgba(255,255,255,0.15)",
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    backdropFilter: "blur(10px)",
   },
 
   notifItem: {
-    paddingVertical: 10,
-    borderBottomColor: "#ffffff30",
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 14,
+    borderBottomColor: "#ffffff55",
     borderBottomWidth: 1,
+  },
+
+  avatar: {
+    width: 55,
+    height: 55,
+    borderRadius: 50,
+    marginRight: 14,
   },
 
   notifText: {
     color: "#fff",
-    fontFamily: "normal",
+    fontSize: 16,
   },
+
+  nome: {
+    fontWeight: "bold",
+  }
 });
+
+export default Notificacoes;
