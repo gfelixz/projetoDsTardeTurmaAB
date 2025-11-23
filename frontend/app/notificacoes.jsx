@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { AntDesign } from "@expo/vector-icons";
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
 const Notificacoes = () => {
@@ -12,7 +12,11 @@ const Notificacoes = () => {
       
 
       <ScrollView contentContainerStyle={{ alignItems: "center", paddingBottom: 40 }}>
-        
+        <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+          <Ionicons name="chevron-back" size={32} color="#fff" />
+        </TouchableOpacity>
+             </View>
         {/* 💛 LOGO GRANDE + TÍTULO */}
         <View style={styles.headerContainer}>
           <Image
@@ -53,6 +57,7 @@ const Notificacoes = () => {
         </View>
       </ScrollView>
     </LinearGradient>
+        
   );
 };
 
@@ -69,6 +74,8 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
+    right: 670, 
+    padding: 5,
   },
 
   /* 💛 HEADER */
